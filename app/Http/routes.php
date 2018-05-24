@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/login','LoginController@login');
+Route::get('/reg','LoginController@register');
+Route::controller('login','LoginController');//提现控制器
