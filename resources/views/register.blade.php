@@ -4,92 +4,75 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <style>body{padding-top: 60px;}</style>
-
     <link href="/bootstrap3/css/bootstrap.css" rel="stylesheet" />
-
+    <link href="/css/style.css" rel="stylesheet" />
     <link href="/css/login-register.css" rel="stylesheet" />
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 
     <script src="/jquery/jquery-1.10.2.js" type="text/javascript"></script>
     <script src="/bootstrap3/js/bootstrap.js" type="text/javascript"></script>
     <script src="/js/login-register.js" type="text/javascript"></script>
+    <script src="/js/common.js" type="text/javascript"></script>
+
+    <style>
+        html, body{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .bcontainer{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+    </style>
 
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4"></div>
-        <div class="col-sm-4">
-            <a class="btn big-login" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log in</a>
-            <a class="btn big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Register</a></div>
-        <div class="col-sm-4"></div>
-    </div>
 
-
-    <div class="modal fade login" id="loginModal" >
-        <div class="modal-dialog login animated">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Login with</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="box">
-                        <div class="content">
-                            <div class="social">
-                                <a class="circle github" href="/auth/github">
-                                    <i class="fa fa-github fa-fw"></i>
-                                </a>
-                                <a id="google_login" class="circle google" href="/auth/google_oauth2">
-                                    <i class="fa fa-google-plus fa-fw"></i>
-                                </a>
-                                <a id="facebook_login" class="circle facebook" href="/auth/facebook">
-                                    <i class="fa fa-facebook fa-fw"></i>
-                                </a>
-                            </div>
-                            <div class="division">
-                                <div class="line l"></div>
-                                <span>or</span>
-                                <div class="line r"></div>
-                            </div>
-                            <div class="error"></div>
-                            <div class="form loginBox">
-                                <form method="post" action="/login" accept-charset="UTF-8">
-                                    <input id="email" class="form-control" type="text" placeholder="Email" name="email">
-                                    <input id="password" class="form-control" type="password" placeholder="Password" name="password">
-                                    <input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="content registerBox" style="display:none;">
-                            <div class="form">
-                                <form method="post" html="{:multipart=>true}" data-remote="true" action="/register" accept-charset="UTF-8">
-                                    <input id="email" class="form-control" type="text" placeholder="Email" name="email">
-                                    <input id="password" class="form-control" type="password" placeholder="Password" name="password">
-                                    <input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">
-                                    <input class="btn btn-default btn-register" type="submit" value="Create account" name="commit">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="forgot login-footer">
-                            <span>Looking to
-                                 <a href="javascript: showRegisterForm();">create an account</a>
-                            ?</span>
-                    </div>
-                    <div class="forgot register-footer" style="display:none">
-                        <span>Already have an account?</span>
-                        <a href="javascript: showLoginForm();">Login</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div id="mainBody">
+    <div id="cloud1" class="cloud"></div>
+    <div id="cloud2" class="cloud"></div>
 </div>
+
+<div id="weather">
+    <img src="images/cloud.png" width="300">
+</div>
+<div class="form loginBox" style="width:300px;height:180px;position:absolute;left:40%;top:50%;margin-top:-190px;padding: 10px;z-index: 999;" >
+    <form method="get" action="{{url('/post_reg')}}">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
+        <div class="form-group">
+            <h3 style="text-align: center;">注册</h3>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1"></label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="请输入账号" name="name">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword"></label>
+            <input type="password" class="form-control" id="exampleInputPassword" placeholder="请输入密码" name="password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1"></label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="请输入密码" name="fpassword">
+        </div>
+        <div class="form-group">
+            <label for="exampleInput2"></label>
+            <input type="text" class="form-control" id="exampleInput2" placeholder="手机号码" name="tel">
+        </div>
+        <div class="form-group">
+            <label for="exampleInput3"></label>
+            <input type="text" class="form-control" id="exampleInput3" placeholder="QQ号码" name="qq">
+        </div>
+
+        <button type="submit" class="btn btn-default" style="margin-left: 100px;">注册</button>
+        <a href="/login" style="margin-left: 20px;color: #080808;padding-top: 5px;">已有账号登录</a>
+    </form>
+</div>
+
 </body>
 </html>
