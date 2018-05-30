@@ -44,6 +44,7 @@
 </div>
 <div class="form loginBox" style="width:300px;height:180px;position:absolute;left:40%;top:50%;margin-top:-190px;padding: 10px;z-index: 999;" >
     <form method="post" action="{{url('/post_login')}}">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="form-group">
             <h3 style="text-align: center;">登录</h3>
         </div>

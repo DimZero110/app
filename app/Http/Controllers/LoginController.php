@@ -59,9 +59,9 @@ class LoginController extends Controller
         if($err){
             return view('login',['err'=>$err]);
         }else{
-            Session::set('user',unserialize($user));
+            Session::set('user',serialize($user));
 
-            redirect('/');
+            return redirect('/');
         }
     }
     public function post_reg(Request $request){
