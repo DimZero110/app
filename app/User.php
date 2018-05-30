@@ -72,8 +72,8 @@ class User extends Model
     }
 
 
-    public function Memberadd($data){
-        $this->fill($data)->save();
+    public static function Memberadd($data){
+        return parent::fill($data)->save();
     }
 
     public static function Memberupdate($uid,$data){
@@ -82,6 +82,9 @@ class User extends Model
 
     public static function Memberdelete($uid){
         return parent::find($uid)->delete();
+    }
+    public static function get_one_by_username($username){
+        return parent::where('username',$username)->first();
     }
 
 }
